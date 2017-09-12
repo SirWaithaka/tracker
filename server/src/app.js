@@ -9,10 +9,6 @@ app.use(morgan('combined'))
 app.use(bodyParser.json())
 app.use(cors())
 
-app.post('/register', (req, res) => {
-  res.send({
-    message: `${req.body.email} has been registered`
-  })
-})
+require('./routes')(app)
 
 module.exports = app
