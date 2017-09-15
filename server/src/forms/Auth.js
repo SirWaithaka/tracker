@@ -10,16 +10,6 @@ function jwtSignUser(user) {
 }
 
 module.exports = {
-  // async login (req, res) {
-  //   return User
-  //     .findOne({
-  //     where: {
-  //       email: req.body.email
-  //     }
-  //   })
-  //   .then(user => res.status(200).send({message: user.toJSON()}))
-  //   .catch(error => res.status(500).send({error: error}))
-  // },
   async login (req, res) {
     try {
       const {email, password} = req.body
