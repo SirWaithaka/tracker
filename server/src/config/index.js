@@ -7,5 +7,8 @@ module.exports = {
       host: 'localhost',
       dialect: 'postgres'
     }
+  },
+  authentication: {
+    jwtSecret: 'secret'
   }
 }
