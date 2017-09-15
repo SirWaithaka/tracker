@@ -4,7 +4,7 @@
       <div class="white elevation-2">
 
         <v-toolbar flat dense dark class="teal">
-          <v-toolbar-title>Register</v-toolbar-title>
+          <v-toolbar-title>Login</v-toolbar-title>
         </v-toolbar>
         <div class="pl-4 pr-4 pd-2 pb-2">
           <v-text-field
@@ -25,9 +25,9 @@
           <small v-html="error"></small>
           <br>
           <v-btn dark class="teal"
-            @click="register"
+            @click="login"
             type="button">
-            Register
+            Login
           </v-btn>
         </div>
       </div>
@@ -37,6 +37,7 @@
 
 <script>
 import AuthenticationService from '@/services/AuthenticationServices'
+
 export default {
   data () {
     return {
@@ -46,9 +47,9 @@ export default {
     }
   },
   methods: {
-    async register () {
+    async login () {
       try {
-        await AuthenticationService.register({
+        await AuthenticationService.login({
           email: this.email,
           password: this.password
         })
