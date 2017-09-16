@@ -25,10 +25,13 @@
     "sequelize-cli": "^3.0.0-2"
   },
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "bluebird": "^3.5.0",
     "body-parser": "^1.18.0",
     "cors": "^2.8.4",
     "express": "^4.15.4",
     "joi": "^10.6.0",
+    "jsonwebtoken": "^8.0.1",
     "morgan": "^1.8.2",
     "pg": "^7.3.0",
     "pg-hstore": "^2.3.2",
