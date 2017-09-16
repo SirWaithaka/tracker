@@ -10,6 +10,16 @@ function jwtSignUser(user) {
 }
 
 module.exports = {
+  // async login (req, res) {
+  //   return User
+  //     .findOne({
+  //     where: {
+  //       email: req.body.email
+  //     }
+  //   })
+  //   .then(user => res.status(200).send({message: user.toJSON()}))
+  //   .catch(error => res.status(500).send({error: error}))
+  // },
   async login (req, res) {
     try {
       const {email, password} = req.body
@@ -23,7 +33,7 @@ module.exports = {
         return res.status(403).send({ error: 'The login credentials were incorrect' })
       }
 
-      const isValidPassword = (password === user.password)
+      const isValidPassword = await user.comparePassword(password)
       if (!isValidPassword)
         return res.status(403).send({ error: 'Username or password you provided is incorrect'})
 
@@ -31,11 +41,10 @@ module.exports = {
         user: user.toJSON(),
         token: jwtSignUser(user.toJSON())
       })
-
     }
     catch (err) {
       res.status(500).send(
-        { error:'Internal server error has occurred' }
+        { error: err }
       )
     }
   },
