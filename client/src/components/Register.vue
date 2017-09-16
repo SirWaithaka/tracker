@@ -7,28 +7,29 @@
           <v-toolbar-title>Register</v-toolbar-title>
         </v-toolbar>
         <div class="pl-4 pr-4 pd-2 pb-2">
-          <v-text-field
-            type="email"
-            label="Email"
-            name="email"
-            v-model="email"
-            required>
-          </v-text-field>
-          <v-text-field
-            type="password"
-            name="password"
-            label="Password"
-            v-model="password"
-            required>
-          </v-text-field>
+          <form name="tab-tracker-form">
+            <v-text-field
+              type="email"
+              label="Email"
+              v-model="email"
+              required>
+            </v-text-field>
+            <v-text-field
+              type="password"
+              label="Password"
+              v-model="password"
+              auto-complete="new-password"
+              required>
+            </v-text-field>
 
-          <small v-html="error"></small>
-          <br>
-          <v-btn dark class="teal"
-            @click="register"
-            type="button">
-            Register
-          </v-btn>
+            <small v-html="error"></small>
+            <br>
+            <v-btn dark class="teal"
+              @click="register"
+              type="button">
+              Register
+            </v-btn>
+          </form>
         </div>
       </div>
     </v-flex>
@@ -37,6 +38,7 @@
 
 <script>
 import AuthenticationService from '@/services/AuthenticationServices'
+
 export default {
   data () {
     return {
@@ -48,10 +50,12 @@ export default {
   methods: {
     async register () {
       try {
-        await AuthenticationService.register({
+        const response = await AuthenticationService.register({
           email: this.email,
           password: this.password
         })
+        this.$store.dispatch('setToken', response.data.token)
+        this.$store.dispatch('setUser', response.data.user)
       } catch (error) {
         this.error = error.response.data.error
       }
